@@ -4,7 +4,7 @@
 #include "pico/stdlib.h" // Biblioteca padrão do Pico (necessária para usar funções de I/O) 
 #include "hardware/pwm.h"
 
-#define SERVO_PIN 22       // GPIO onde o servo está conectado
+#define SERVO_PIN 20       // GPIO onde o servo está conectado
 #define LED_PIN 12         // GPIO onde o LED RGB está conectado
 #define PWM_FREQ 50        // Frequência do PWM em Hz (50Hz = 20ms)
 #define PWM_WRAP 20000     // Período do PWM em unidades de 1µs (20ms)
@@ -24,47 +24,63 @@ void pwm_setup(uint gpio) {
 // Função para definir a posição do servo em graus
 void set_servo_angle(uint gpio, uint angle) {
     if (angle > 180) angle = 180; // Garante que o ângulo não passe de 180°
+    if (angle < 0) angle = 0;     // Garante que o ângulo não seja negativo
     uint pulse_us = SERVO_MIN_US + ((SERVO_MAX_US - SERVO_MIN_US) * angle) / 180;
     uint slice = pwm_gpio_to_slice_num(gpio);
     uint channel = pwm_gpio_to_channel(gpio);
     pwm_set_chan_level(slice, channel, pulse_us);
 }
 
+// Função para definir o brilho do LED RGB (0-255)
+void set_led_brightness(uint gpio, uint brightness) {
+    uint slice = pwm_gpio_to_slice_num(gpio);
+    uint channel = pwm_gpio_to_channel(gpio);
+    pwm_set_chan_level(slice, channel, brightness);
+}
+
 int main() {
     stdio_init_all(); // Inicializa a comunicação serial (USB)
 
-    // Configura o PWM para o servo na GPIO 22
+    // Configura o PWM para o led na GPIO 12   
+    pwm_setup(LED_PIN);  // Configura o LED como PWM
+    // Configura o PWM para o servo na GPIO 20
     pwm_setup(SERVO_PIN);
 
     // Configura o LED RGB na GPIO 12
-    gpio_init(LED_PIN);
-    gpio_set_dir(LED_PIN, GPIO_OUT);
+ //   gpio_init(LED_PIN);
+ //   gpio_set_dir(LED_PIN, GPIO_OUT);
 
     // Movimentos iniciais do servo
     printf("Movendo o servo para 180 graus\n");
     set_servo_angle(SERVO_PIN, 180);
-    gpio_put(LED_PIN, 1);
+    set_led_brightness(LED_PIN, 200); // Brilho máximo
+    //gpio_put(LED_PIN, 1);
     sleep_ms(5000);
 
     printf("Movendo o servo para 90 graus\n");
     set_servo_angle(SERVO_PIN, 90);
-    gpio_put(LED_PIN, 0);
+    set_led_brightness(LED_PIN, 0); // Brilho mínimo
+    //gpio_put(LED_PIN, 0);
     sleep_ms(5000);
 
     printf("Movendo o servo para 0 graus\n");
     set_servo_angle(SERVO_PIN, 0);
-    gpio_put(LED_PIN, 1);
+    set_led_brightness(LED_PIN, 100); // Brilho máximo
+//    gpio_put(LED_PIN, 1);
     sleep_ms(5000);
 
     // Movimentação periódica do servo entre 0 e 180 graus
     printf("Iniciando movimentação periódica do servo\n");
+ 
     while (true) {
         for (uint angle = 0; angle <= 180; angle++) {
             set_servo_angle(SERVO_PIN, angle);
+            set_led_brightness(LED_PIN, ((180 - angle) * PWM_WRAP) / 180); // Diminui brilho conforme ângulo aumenta
             sleep_ms(DELAY_MS);
         }
         for (uint angle = 180; angle > 0; angle--) {
             set_servo_angle(SERVO_PIN, angle);
+            set_led_brightness(LED_PIN, ((180 - angle) * PWM_WRAP) / 180); // Aumenta brilho conforme ângulo diminui
             sleep_ms(DELAY_MS);
         }
     }
