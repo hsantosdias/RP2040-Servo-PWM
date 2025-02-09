@@ -59,7 +59,14 @@ int main() {
     // Movimentação periódica do servo entre 0 e 180 graus
     printf("Iniciando movimentação periódica do servo\n");
     while (true) {
-        sleep_ms(1000);
+        for (uint angle = 0; angle <= 180; angle++) {
+            set_servo_angle(SERVO_PIN, angle);
+            sleep_ms(DELAY_MS);
+        }
+        for (uint angle = 180; angle > 0; angle--) {
+            set_servo_angle(SERVO_PIN, angle);
+            sleep_ms(DELAY_MS);
+        }
     }
 
     return 0;
