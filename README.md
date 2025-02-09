@@ -42,11 +42,41 @@ Além do controle de posição do servo entre **0°**, **90°** e **180°**, o p
    - Faça upload do código-fonte
    - Execute a simulação e observe o movimento do servomotor
 
+   
+[![Simulador Wokwi](imgs/simulador_wokwi.png "Mosta a imagem do Simulador ultilizado")](https://github.com/hsantosdias/RP2040-Servo-PWM/blob/main/imgs/simulador_wokwi.png?raw=true "Imagem do simulador")
+
 6. **Experimento com LED RGB**
 
    - Após rodar o código no **BitDogLab**, observe como o PWM altera a luminosidade do LED RGB de acordo com o ângulo do servo.
 
 
+
+## Fluxograma
+
+O fluxograma abaixo representa o funcionamento geral do código principal.
+
+**Fluxograma do projeto**
+
+[![Fluxograma deste projeto](imgs/fluxograma_projeto.png "Fluxograma Deste projeto")](https://github.com/hsantosdias/RP2040-Servo-PWM/blob/main/imgs/fluxograma_projeto.png?raw=true "Fluxograma do projeto")
+
+Este fluxograma ilustra as principais etapas do código, incluindo inicializações e o loop principal de execução.
+
+
+### Explicação do Fluxograma:
+1. **Inicialização:**
+
+- O sistema inicia configurando PWM, GPIOs e comunicação serial USB.
+- A GPIO 22 é configurada como saída PWM.
+- O slice e o canal do PWM são obtidos.
+- O divisor de clock e o período do PWM são ajustados para garantir 50Hz (período de 20ms).
+- O PWM é ativado.
+
+2. **Loop infinito:**
+
+- O servo motor se move para 180° (pulso de 2400µs) e espera 500ms.
+- O servo motor se move para 0° (pulso de 500µs) e espera 500ms.
+- O servo motor se move para 90° (pulso de 1470µs) e espera 500ms.
+- O ciclo se repete indefinidamente.
 
 ## Funcionalidades Implementadas
 
