@@ -4,7 +4,7 @@
 #include "pico/stdlib.h" // Biblioteca padrão do Pico (necessária para usar funções de I/O) 
 #include "hardware/pwm.h" // Biblioteca para controle de PWM (necessária para usar funções de PWM) 
 
-#define SERVO_PIN 20       // GPIO onde o servo está conectado 
+#define SERVO_PIN 22       // GPIO onde o servo está conectado 
 #define LED_PIN 12         // GPIO onde o LED RGB está conectado
 #define PWM_FREQ 50        // Frequência do PWM em Hz (50Hz = 20ms)
 #define PWM_WRAP 20000     // Período do PWM em unidades de 1µs (20ms)
@@ -52,7 +52,7 @@ int main() {
 
     // Configura o PWM para o led na GPIO 12    
     pwm_setup(LED_PIN);  // Configura o LED como PWM na GPIO 12
-    // Configura o PWM para o servo na GPIO 20 
+    // Configura o PWM para o servo na GPIO 22 
     pwm_setup(SERVO_PIN);
 
     // Movimentos iniciais do servo e do LED RGB
