@@ -10,7 +10,7 @@
 #define PWM_WRAP 20000     // Período do PWM em unidades de 1µs (20ms)
 #define SERVO_MIN_US 500   // Largura de pulso mínima para 0 graus (500µs)
 #define SERVO_MAX_US 2400  // Largura de pulso máxima para 180 graus (2400µs)
-#define DELAY_MS 10        // Atraso para movimentação suave do servo (10ms)
+#define DELAY_MS 15        // Atraso para movimentação suave do servo (10ms)
 
 // Função para configurar o PWM no pino especificado
 void pwm_setup(uint gpio) {
