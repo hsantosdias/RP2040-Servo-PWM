@@ -23,7 +23,7 @@ void pwm_setup(uint gpio) {
 
 // Função para definir a posição do servo em graus
 void set_servo_angle(uint gpio, uint angle) {
-    if (angle > 180) angle = 180; // Garante que o ângulo não passe de 180°
+    if (angle > 180) angle = 180; // Garante que o ângulo não passe de 180° // Garante que o ângulo não passe de 180° 
     if (angle < 0) angle = 0;     // Garante que o ângulo não seja negativo
     // Calcula a largura de pulso em microssegundos (500µs a 2400µs para 0° a 180°)
     uint pulse_us = SERVO_MIN_US + ((SERVO_MAX_US - SERVO_MIN_US) * angle) / 180;

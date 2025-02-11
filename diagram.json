@@ -337,7 +337,7 @@
     [ "pico:GP11", "rgb26:G", "orange", [ "h-76.8", "v76.8", "h-67.2" ] ],
     [ "servo1:GND", "pico:GND.7", "black", [ "h0" ] ],
     [ "servo1:V+", "pico:3V3", "red", [ "h-9.6", "v-47.9", "h-28.8", "v9.6" ] ],
-    [ "servo1:PWM", "pico:GP20", "green", [ "h-9.6", "v48.2" ] ]
+    [ "servo1:PWM", "pico:GP22", "green", [ "h-9.6", "v48.2" ] ]
   ],
   "dependencies": {}
 }
