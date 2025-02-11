@@ -1,5 +1,9 @@
 # RP2040-Servo-PWM
 
+**Neste Link podemos ver o projeto em funcionamento**
+
+[Video demonstrando o projeto em funcinamento](https://drive.google.com/file/d/1VCeH9sHMkf7hTB5gCYBt_TEcoNgjlCm9/view?usp=sharing "Video demonstrando o projeto em funcinamento")
+
 ## Descrição do Projeto
 
 Este projeto implementa o controle de um **servomotor** utilizando **Modulação por Largura de Pulso (PWM)** no microcontrolador **RP2040**. O código é desenvolvido em **C**, utilizando o **Pico SDK**, e testado no simulador **Wokwi**.
@@ -224,4 +228,3 @@ Durante o desenvolvimento, alguns desafios surgiram e foram superados:
 
 ---
 
-## Link do Vídeo
