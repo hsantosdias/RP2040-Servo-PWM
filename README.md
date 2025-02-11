@@ -10,7 +10,6 @@ Além do controle de posição do servo entre **0°**, **90°** e **180°**, o p
 
 ## Configuração do Ambiente Instalação e Uso
 
-
 1. **Instale o SDK do Raspberry Pi Pico:**
 
    - Siga o guia oficial para configuração: [Guia do Raspberry Pi Pico](https://www.raspberrypi.com/documentation/microcontrollers/)
@@ -35,18 +34,44 @@ Além do controle de posição do servo entre **0°**, **90°** e **180°**, o p
 
    - Conecte o Pico ao computador no modo bootloader.
    - Copie o arquivo `.uf2` (Depois de compilado, copiar o ./build/RP2040-Servo-PWM.uf2  para a Raspberry em modo bootsel).
-
 5. **Execute no simulador Wokwi**
 
    - Abra [Simulador Wokwi](https://wokwi.com/projects/422365413208901633 "ACesso ao simulador")
    - Faça upload do código-fonte
    - Execute a simulação e observe o movimento do servomotor
 
+[![Simulador Wokwi](imgs/simulador_wokwi.png "Mosta a imagem do Simulador ultilizado")](https://github.com/hsantosdias/RP2040-Servo-PWM/blob/main/imgs/simulador_wokwi.png?raw=true "Imagem do simulador")
+
 6. **Experimento com LED RGB**
 
    - Após rodar o código no **BitDogLab**, observe como o PWM altera a luminosidade do LED RGB de acordo com o ângulo do servo.
 
+## Fluxograma
 
+O fluxograma abaixo representa o funcionamento geral do código principal.
+
+**Fluxograma do projeto**
+
+[![Fluxograma deste projeto](imgs/fluxograma_projeto.png "Fluxograma Deste projeto")](https://github.com/hsantosdias/RP2040-Servo-PWM/blob/main/imgs/fluxograma_projeto.png?raw=true "Fluxograma do projeto")
+
+Este fluxograma ilustra as principais etapas do código, incluindo inicializações e o loop principal de execução.
+
+### Explicação do Fluxograma:
+
+1. **Inicialização:**
+
+- O sistema inicia configurando PWM, GPIOs e comunicação serial USB.
+- A GPIO 22 é configurada como saída PWM.
+- O slice e o canal do PWM são obtidos.
+- O divisor de clock e o período do PWM são ajustados para garantir 50Hz (período de 20ms).
+- O PWM é ativado.
+
+2. **Loop infinito:**
+
+- O servo motor se move para 180° (pulso de 2400µs) e espera 500ms.
+- O servo motor se move para 0° (pulso de 500µs) e espera 500ms.
+- O servo motor se move para 90° (pulso de 1470µs) e espera 500ms.
+- O ciclo se repete indefinidamente.
 
 ## Funcionalidades Implementadas
 
@@ -72,7 +97,7 @@ Os requisitos definidos para esta atividade são:
    - **0°** → Pulso de **500µs** (2.5% Duty Cycle). Aguardar **5 segundos**.
 3) **Movimentação Periódica**:
 
-   - Criar uma rotina que movimente o servo entre **0° e 180°** de forma **suave**, com incrementos de **±5µs** e um atraso de **10ms** entre ajustes.
+   - Criar uma rotina que movimente o servo entre **0° e 180°** de forma **suave**, com incrementos de **±5µs** e um atraso de **15ms** entre ajustes.
 4) **Experimento com LED RGB**:
 
    - Implementar um **controle de brilho** no **LED RGB (GPIO 12)** baseado na posição do servo.
@@ -200,4 +225,3 @@ Durante o desenvolvimento, alguns desafios surgiram e foram superados:
 ---
 
 ## Link do Vídeo
-
